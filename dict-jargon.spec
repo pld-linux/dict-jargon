@@ -1,4 +1,4 @@
-%define         dictname jargon
+%define		dictname jargon
 Summary:	The On-Line Hacker Jargon File dictionary for dictd
 Summary(pl):	S³ownik Hacker Jargon dla dictd
 Name:		dict-%{dictname}
@@ -8,11 +8,11 @@ License:	GPL
 Group:		Applications/Dictionaries
 Source0:	ftp://ftp.dict.org/pub/dict/%{name}-%{version}.tar.gz
 URL:		http://www.dict.org/
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-BuildRequires:	dictzip
 BuildRequires:	autoconf
+BuildRequires:	dictzip
 Requires:	dictd
 Requires:	%{_sysconfdir}/dictd
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 This package contains The On-Line Hacker Jargon File, version 4.2.0,
@@ -38,25 +38,24 @@ install -d $RPM_BUILD_ROOT{%{_datadir}/dictd/,%{_sysconfdir}/dictd}
 dictprefix=%{_datadir}/dictd/%{dictname}
 echo "# The On-Line Hacker Jargon File dictionary
 database %{dictname} {
-    data  \"$dictprefix.dict.dz\"
-    index \"$dictprefix.index\"
-}
-" > $RPM_BUILD_ROOT%{_sysconfdir}/dictd/%{dictname}.dictconf
+	data  \"$dictprefix.dict.dz\"
+	index \"$dictprefix.index\"
+}" > $RPM_BUILD_ROOT%{_sysconfdir}/dictd/%{dictname}.dictconf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%postun
-if [ -f /var/lock/subsys/dictd ]; then
-	/etc/rc.d/init.d/dictd restart 1>&2
-fi
 
 %post
 if [ -f /var/lock/subsys/dictd ]; then
 	/etc/rc.d/init.d/dictd restart 1>&2
 fi
 
+%postun
+if [ -f /var/lock/subsys/dictd ]; then
+	/etc/rc.d/init.d/dictd restart 1>&2 || true
+fi
+
 %files
 %defattr(644,root,root,755)
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/dictd/*.dictconf
-%{_datadir}/dictd/%{dictname}*
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/dictd/%{dictname}.dictconf
+%{_datadir}/dictd/%{dictname}.*
