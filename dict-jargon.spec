@@ -2,38 +2,37 @@
 Summary:	The On-Line Hacker Jargon File dictionary for dictd
 Summary(pl):	S這wnik Hacker Jargon dla dictd
 Name:		dict-%{dictname}
-Version:	4.2.0
-Release:	3
+Version:	4.3.3
+Release:	1
 License:	GPL
 Group:		Applications/Dictionaries
-Source0:	ftp://ftp.dict.org/pub/dict/%{name}-%{version}.tar.gz
+Source0:	http://www.tuxedo.org/~esr/jargon/jarg433.gz
 URL:		http://www.dict.org/
-BuildRequires:	autoconf
+BuildRequires:	dictfmt
 BuildRequires:	dictzip
 Requires:	dictd
 Requires:	%{_sysconfdir}/dictd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This package contains The On-Line Hacker Jargon File, version 4.2.0,
+This package contains The On-Line Hacker Jargon File, version %version,
 formatted for use by the dictionary server in the dictd package.
 
 %description -l pl
 Ten pakiet zawiera s這wnik The On-Line Hacker Jargon File w wersji
-4.2.0, sformatowany do u篡tku z serwerem s這wnika dictd.
+%version, sformatowany do u篡tku z serwerem s這wnika dictd.
 
 %prep
-%setup -q
+%setup -c -T
+%{__gzip} -dc %{SOURCE0} > jarg433
 
 %build
-%{__autoconf}
-%configure
-%{__make} db
+dictfmt -j -u http://www.jargon.org/ -s "Jargon File (4.3.3, 20 Sep 2002)" %{dictname} < jarg433
+dictzip %{dictname}.dict
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_datadir}/dictd/,%{_sysconfdir}/dictd}
-%{__make} install dictdir=$RPM_BUILD_ROOT%{_datadir}/dictd
+install -d $RPM_BUILD_ROOT{%{_datadir}/dictd,%{_sysconfdir}/dictd}
 
 dictprefix=%{_datadir}/dictd/%{dictname}
 echo "# The On-Line Hacker Jargon File dictionary
@@ -41,6 +40,7 @@ database %{dictname} {
 	data  \"$dictprefix.dict.dz\"
 	index \"$dictprefix.index\"
 }" > $RPM_BUILD_ROOT%{_sysconfdir}/dictd/%{dictname}.dictconf
+mv %{dictname}.* $RPM_BUILD_ROOT%{_datadir}/dictd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
