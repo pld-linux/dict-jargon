@@ -25,7 +25,7 @@ Ten pakiet zawiera s³ownik The On-Line Hacker Jargon File w wersji
 %version, sformatowany do u¿ytku z serwerem s³ownika dictd.
 
 %prep
-%setup -c -T
+%setup -q -c -T
 %{__gzip} -dc %{SOURCE0} > jarg433
 
 %build
