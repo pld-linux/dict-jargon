@@ -13,7 +13,8 @@ Requires:       dictd
 BuildArch:      noarch
 
 %description 
-This package contains The On-Line Hacker Jargon File, version 4.2.0,                     formatted for use by the dictionary server in the dictd package.
+This package contains The On-Line Hacker Jargon File, version 4.2.0,
+formatted for use by the dictionary server in the dictd package.
 
 %prep
 %setup -q
