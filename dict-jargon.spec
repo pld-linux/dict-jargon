@@ -6,8 +6,9 @@ Version:	4.3.3
 Release:	1
 License:	GPL
 Group:		Applications/Dictionaries
-Source0:	http://www.tuxedo.org/~esr/jargon/jarg433.gz
-# Source0-md5:	d68a6c42dfbf5bdd9f42792d11563d5b
+# Source0:	http://www.tuxedo.org/~esr/jargon/jarg433.gz
+Source0:	http://atos.wmid.amu.edu.pl/~undefine/jarg433.gz
+# Source0-md5:	dcfee414bc8576e9d6eab9b2980226a0
 URL:		http://www.dict.org/
 BuildRequires:	dictfmt
 BuildRequires:	dictzip
