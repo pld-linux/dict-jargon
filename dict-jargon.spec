@@ -4,13 +4,14 @@ Name:		dict-%{dictname}
 Version:	4.2.0
 Release:	1
 License:	GPL
-Group:		Applications/Dictionary
+Group:		Applications/Dictionaries
+Group(pl):	Aplikacje/S³owniki
 URL:		http://www.dict.org/
 Source0:	ftp://ftp.dict.org/pub/dict/%{name}-%{version}.tar.gz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-BuildRequires:  dictzip
-Requires:       dictd 
-BuildArch:      noarch
+BuildRequires:	dictzip
+Requires:	dictd 
+BuildArch:	noarch
 
 %description 
 This package contains The On-Line Hacker Jargon File, version 4.2.0,
@@ -28,7 +29,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_datadir}/dictd/
 
 DICTDIR="$RPM_BUILD_ROOT%{_datadir}/dictd/"
-make install dictdir="$DICTDIR" 
+%{__make} install dictdir="$DICTDIR" 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
