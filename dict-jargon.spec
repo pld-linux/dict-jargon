@@ -6,8 +6,6 @@ Version:	4.2.0
 Release:	2
 License:	GPL
 Group:		Applications/Dictionaries
-Group(de):	Applikationen/Wörterbücher
-Group(pl):	Aplikacje/S³owniki
 Source0:	ftp://ftp.dict.org/pub/dict/%{name}-%{version}.tar.gz
 URL:		http://www.dict.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
