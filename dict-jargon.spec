@@ -17,12 +17,12 @@ Requires:	%{_sysconfdir}/dictd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This package contains The On-Line Hacker Jargon File, version %version,
+This package contains The On-Line Hacker Jargon File, version %{version},
 formatted for use by the dictionary server in the dictd package.
 
 %description -l pl
 Ten pakiet zawiera s³ownik The On-Line Hacker Jargon File w wersji
-%version, sformatowany do u¿ytku z serwerem s³ownika dictd.
+%{version}, sformatowany do u¿ytku z serwerem s³ownika dictd.
 
 %prep
 %setup -q -c -T
