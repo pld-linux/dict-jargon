@@ -1,13 +1,15 @@
 %define         dictname jargon
 Summary:	The On-Line Hacker Jargon File dictionary for dictd
+Summary(pl):	S這wnik Hacker Jargon dla dictd
 Name:		dict-%{dictname}
 Version:	4.2.0
 Release:	2
 License:	GPL
 Group:		Applications/Dictionaries
+Group(de):	Applikationen/W顤terb�cher
 Group(pl):	Aplikacje/S這wniki
-URL:		http://www.dict.org/
 Source0:	ftp://ftp.dict.org/pub/dict/%{name}-%{version}.tar.gz
+URL:		http://www.dict.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	dictzip
 BuildRequires:	autoconf
@@ -17,6 +19,10 @@ Requires:	%{_sysconfdir}/dictd
 %description 
 This package contains The On-Line Hacker Jargon File, version 4.2.0,
 formatted for use by the dictionary server in the dictd package.
+
+%description -l pl
+Ten pakiet zawiera s這wnik The On-Line Hacker Jargon File w wersji
+4.2.0, sformatowany do u篡tku z serwerem s這wnika dictd.
 
 %prep
 %setup -q
