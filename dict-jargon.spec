@@ -2,7 +2,7 @@
 Summary:	The On-Line Hacker Jargon File dictionary for dictd
 Name:		dict-%{dictname}
 Version:	4.2.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Dictionaries
 Group(pl):	Aplikacje/S³owniki
@@ -11,6 +11,7 @@ Source0:	ftp://ftp.dict.org/pub/dict/%{name}-%{version}.tar.gz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	dictzip
 Requires:	dictd 
+Requires:	%{_sysconfdir}/dictd
 BuildArch:	noarch
 
 %description 
@@ -26,26 +27,31 @@ formatted for use by the dictionary server in the dictd package.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_datadir}/dictd/
+install -d $RPM_BUILD_ROOT{%{_datadir}/dictd/,%{_sysconfdir}/dictd}
+%{__make} install dictdir="$RPM_BUILD_ROOT%{_datadir}/dictd/"
 
-DICTDIR="$RPM_BUILD_ROOT%{_datadir}/dictd/"
-%{__make} install dictdir="$DICTDIR" 
+dictprefix=%{_datadir}/dictd/%{dictname}
+echo "# The On-Line Hacker Jargon File dictionary
+database %{dictname} {
+    data  \"$dictprefix.dict.dz\"
+    index \"$dictprefix.index\" 
+}
+" > $RPM_BUILD_ROOT%{_sysconfdir}/dictd/%{dictname}.dictconf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-prefix=%{_datadir}/dictd/%{dictname}
+%postun
+if [ -f /var/lock/subsys/dictd ]; then
+	/etc/rc.d/init.d/dictd restart 1>&2
+fi
 
-if ! grep ' %{dictname} ' /etc/dictd.conf >/dev/null; then 
-   echo "Edit /etc/dictd.conf to see %{dictname} dictionary under dictd"
-echo "# Uncommment this to configure The On-Line Hacker Jargon File dictionary
-#database %{dictname} {
-#    data  \"$prefix.dict.dz\"
-#    index \"$prefix.index\" }
-" >> /etc/dictd.conf
+%post
+if [ -f /var/lock/subsys/dictd ]; then
+	/etc/rc.d/init.d/dictd restart 1>&2
 fi
 
 %files
 %defattr(644,root,root,755)
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/dictd/*.dictconf
 %{_datadir}/dictd/%{dictname}*
