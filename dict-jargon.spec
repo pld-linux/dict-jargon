@@ -26,7 +26,7 @@ Ten pakiet zawiera s³ownik The On-Line Hacker Jargon File w wersji
 %setup -q
 
 %build
-autoconf
+%{__autoconf}
 %configure
 %{__make} db
 
