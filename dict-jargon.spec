@@ -3,7 +3,7 @@ Summary:	The On-Line Hacker Jargon File dictionary for dictd
 Summary(pl):	S³ownik Hacker Jargon dla dictd
 Name:		dict-%{dictname}
 Version:	4.3.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Dictionaries
 # Source0:	http://www.tuxedo.org/~esr/jargon/jarg433.gz
