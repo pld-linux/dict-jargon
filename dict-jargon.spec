@@ -11,10 +11,10 @@ URL:		http://www.dict.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	dictzip
 BuildRequires:	autoconf
-Requires:	dictd 
+Requires:	dictd
 Requires:	%{_sysconfdir}/dictd
 
-%description 
+%description
 This package contains The On-Line Hacker Jargon File, version 4.2.0,
 formatted for use by the dictionary server in the dictd package.
 
@@ -27,8 +27,8 @@ Ten pakiet zawiera s³ownik The On-Line Hacker Jargon File w wersji
 
 %build
 autoconf
-%configure 
-%{__make} db 
+%configure
+%{__make} db
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -39,7 +39,7 @@ dictprefix=%{_datadir}/dictd/%{dictname}
 echo "# The On-Line Hacker Jargon File dictionary
 database %{dictname} {
     data  \"$dictprefix.dict.dz\"
-    index \"$dictprefix.index\" 
+    index \"$dictprefix.index\"
 }
 " > $RPM_BUILD_ROOT%{_sysconfdir}/dictd/%{dictname}.dictconf
 
