@@ -12,13 +12,14 @@ Source0:	http://atos.wmid.amu.edu.pl/~undefine/jarg433.gz
 URL:		http://www.dict.org/
 BuildRequires:	dictfmt
 BuildRequires:	dictzip
-Requires:	dictd
 Requires:	%{_sysconfdir}/dictd
+Requires:	dictd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This package contains The On-Line Hacker Jargon File, version %{version},
-formatted for use by the dictionary server in the dictd package.
+This package contains The On-Line Hacker Jargon File, version
+%{version}, formatted for use by the dictionary server in the dictd
+package.
 
 %description -l pl
 Ten pakiet zawiera s³ownik The On-Line Hacker Jargon File w wersji
@@ -59,5 +60,5 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/dictd/%{dictname}.dictconf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dictd/%{dictname}.dictconf
 %{_datadir}/dictd/%{dictname}.*
