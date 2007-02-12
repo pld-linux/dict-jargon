@@ -1,6 +1,6 @@
 %define		dictname jargon
 Summary:	The On-Line Hacker Jargon File dictionary for dictd
-Summary(pl):	S≥ownik Hacker Jargon dla dictd
+Summary(pl.UTF-8):   S≈Çownik Hacker Jargon dla dictd
 Name:		dict-%{dictname}
 Version:	4.4.7
 Release:	2
@@ -21,9 +21,9 @@ This package contains The On-Line Hacker Jargon File, version
 %{version}, formatted for use by the dictionary server in the dictd
 package.
 
-%description -l pl
-Ten pakiet zawiera s≥ownik The On-Line Hacker Jargon File w wersji
-%{version}, sformatowany do uøytku z serwerem s≥ownika dictd.
+%description -l pl.UTF-8
+Ten pakiet zawiera s≈Çownik The On-Line Hacker Jargon File w wersji
+%{version}, sformatowany do u≈ºytku z serwerem s≈Çownika dictd.
 
 %prep
 %setup -q -c -T
