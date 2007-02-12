@@ -1,6 +1,6 @@
 %define		dictname jargon
 Summary:	The On-Line Hacker Jargon File dictionary for dictd
-Summary(pl.UTF-8):   Słownik Hacker Jargon dla dictd
+Summary(pl.UTF-8):	Słownik Hacker Jargon dla dictd
 Name:		dict-%{dictname}
 Version:	4.4.7
 Release:	2
