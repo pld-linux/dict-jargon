@@ -3,7 +3,7 @@ Summary:	The On-Line Hacker Jargon File dictionary for dictd
 Summary(pl.UTF-8):	Słownik Hacker Jargon dla dictd
 Name:		dict-%{dictname}
 Version:	4.4.7
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Dictionaries
 # Source0:	http://www.tuxedo.org/~esr/jargon/jarg433.gz
@@ -12,6 +12,7 @@ Source0:	http://atos.wmid.amu.edu.pl/~undefine/jarg433.gz
 URL:		http://www.dict.org/
 BuildRequires:	dictfmt
 BuildRequires:	dictzip
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires:	%{_sysconfdir}/dictd
 Requires:	dictd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -49,13 +50,11 @@ mv %{dictname}.* $RPM_BUILD_ROOT%{_datadir}/dictd
 rm -rf $RPM_BUILD_ROOT
 
 %post
-if [ -f /var/lock/subsys/dictd ]; then
-	/etc/rc.d/init.d/dictd restart 1>&2
-fi
+%service -q dictd restart
 
 %postun
-if [ -f /var/lock/subsys/dictd ]; then
-	/etc/rc.d/init.d/dictd restart 1>&2 || true
+if [ "$1" = 0 ]; then
+	%service -q dictd restart
 fi
 
 %files
